@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.geekbrains.ChatController">
+    <children>
+        <HBox fx:id="authPanel">
+            <TextField fx:id="loginField" promptText="Login" HBox.hgrow="ALWAYS"/>
+            <PasswordField fx:id="passField" promptText="password" HBox.hgrow="ALWAYS"/>
+            <Button onAction="#sendAuth" text="connect" HBox.hgrow="ALWAYS"/>
+        </HBox>
+        <MenuBar fx:id="menuBar" visible="false">
+            <Menu text="File">
+                <MenuItem onAction="#mockAction" text="Item1" />
+                <MenuItem onAction="#mockAction" text="Item2" />
+                <MenuItem onAction="#mockAction" text="Item3" />
+                <MenuItem onAction="#exit" text="Exit" />
+            </Menu>
+            <Menu text="Edit">
+                <MenuItem onAction="#mockAction" text="Item1" />
+                <MenuItem onAction="#mockAction" text="Item2" />
+                <MenuItem onAction="#mockAction" text="Item3" />
+            </Menu>
+            <Menu text="Some menu">
+                <MenuItem onAction="#mockAction" text="Item1" />
+                <MenuItem onAction="#mockAction" text="Item2" />
+                <MenuItem onAction="#mockAction" text="Item3" />
+            </Menu>
+            <Menu text="Help">
+                <MenuItem onAction="#showHelp" text="help" />
+                <MenuItem onAction="#mockAction" text="Item2" />
+                <MenuItem onAction="#mockAction" text="Item3" />
+            </Menu>
+        </MenuBar>
+        <HBox VBox.vgrow="ALWAYS" visible="false" fx:id="chatBox">
+            <TextArea fx:id="chatArea" editable="false" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="onlineUsers" prefWidth="140.0" />
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </HBox>
+        <HBox spacing="5.0" visible="false" fx:id="inputBox">
+            <TextField fx:id="input" onAction="#pressEnter" prefHeight="80.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnSendMessage" lineSpacing="10.0" mnemonicParsing="false" onAction="#btnSend" prefHeight="80.0" prefWidth="140.0" text="SEND" textFill="#c30909" />
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </HBox>
+
+    </children>
+</VBox>
