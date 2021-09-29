@@ -2,6 +2,8 @@ package ru.geekbrains;
 
 import ru.geekbrains.server.ChatServer;
 
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Project java_core_l2
  *
@@ -36,7 +38,7 @@ public class ServerApp {
     //Цензура?
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
         new ChatServer();
     }
 }

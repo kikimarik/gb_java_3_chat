@@ -41,6 +41,10 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </HBox>
+        <HBox fx:id="requestPanel" visible="false">
+            <TextField fx:id="usernameField" promptText="New username" HBox.hgrow="ALWAYS"/>
+            <Button onAction="#sendChangeNameRequest" text="Change username" HBox.hgrow="ALWAYS"/>
+        </HBox>
         <HBox spacing="5.0" visible="false" fx:id="inputBox">
             <TextField fx:id="input" onAction="#pressEnter" prefHeight="80.0" HBox.hgrow="ALWAYS" />
             <Button fx:id="btnSendMessage" lineSpacing="10.0" mnemonicParsing="false" onAction="#btnSend" prefHeight="80.0" prefWidth="140.0" text="SEND" textFill="#c30909" />

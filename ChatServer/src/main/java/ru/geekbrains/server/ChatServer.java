@@ -1,13 +1,15 @@
 package ru.geekbrains.server;
 
 import ru.geekbrains.auth.AuthService;
-import ru.geekbrains.auth.PrimitiveAuthService;
+import ru.geekbrains.auth.Client;
+import ru.geekbrains.auth.SQLiteAuthService;
 import ru.geekbrains.messages.MessageDTO;
 import ru.geekbrains.messages.MessageType;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,10 +29,10 @@ public class ChatServer {
     private List<ClientHandler> onlineClientsList;
     private AuthService authService;
 
-    public ChatServer() {
+    public ChatServer() throws NoSuchAlgorithmException {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Server started");
-            authService = new PrimitiveAuthService();
+            authService = new SQLiteAuthService();
             authService.start();
             onlineClientsList = new LinkedList<>();
             while (true) {
@@ -89,5 +91,9 @@ public class ChatServer {
 
     public AuthService getAuthService() {
         return authService;
+    }
+
+    public void requestChangeName(Client user, String requestedUsername) throws NoSuchAlgorithmException {
+        this.authService.changeUsername(requestedUsername, user);
     }
 }
