@@ -13,10 +13,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import network.ChatMessageService;
 import network.MessageProcessor;
 import network.MessageService;
+import ru.geekbrains.logger.MessageLogger;
 import ru.geekbrains.messages.MessageDTO;
 import ru.geekbrains.messages.MessageType;
 
@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.List;
+import java.util.ArrayDeque;
 import java.util.ResourceBundle;
 
 /**
@@ -79,6 +79,14 @@ public class ChatController implements Initializable, MessageProcessor {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         messageService = new ChatMessageService("localhost", 65500, this);
+        MessageLogger logger = new MessageLogger();
+//        for (MessageDTO message : logger.read(10).messages) {
+//            this.showMessage(message, true);
+//        }
+        ArrayDeque<MessageDTO> deque = logger.read(10).messages;
+        while (!deque.isEmpty()) {
+            this.showMessage(deque.pop(), true);
+        }
     }
 
     /**
@@ -169,6 +177,15 @@ public class ChatController implements Initializable, MessageProcessor {
      * @param message
      */
     private void showMessage(MessageDTO message) {
+        MessageLogger logger = new MessageLogger();
+        logger.write(message);
+        this.showMessage(message, true);
+    }
+
+    private void showMessage(MessageDTO message, boolean noLog) {
+        if (!noLog) {
+            this.showMessage(message);
+        }
         String msg = String.format("[%s] [%s] -> %s\n", message.getMessageType(), message.getFrom(), message.getBody());
         chatArea.appendText(msg);
     }

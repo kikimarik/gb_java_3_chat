@@ -2,6 +2,7 @@ package ru.geekbrains.messages;
 
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
  * DataTransferObject - объект, который имеет все нужные нам поля и будет отправляться в обе стороны по сети.
  * Также присутствуют методы сериализации и десереализации в формат JSON
  */
-public class MessageDTO {
+public class MessageDTO implements Serializable {
     private MessageType messageType;
     private String body;
     private String login;

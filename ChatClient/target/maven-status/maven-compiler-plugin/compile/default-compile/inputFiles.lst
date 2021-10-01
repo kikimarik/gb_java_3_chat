@@ -1,6 +1,8 @@
-C:\java\java_core_l2\ChatClient\src\main\java\ru\geekbrains\NetworkHelper.java
-C:\java\java_core_l2\ChatClient\src\main\java\ru\geekbrains\MessageServiceOld.java
-C:\java\java_core_l2\ChatClient\src\main\java\ru\geekbrains\SingleClientConsole.java
-C:\java\java_core_l2\ChatClient\src\main\java\ru\geekbrains\AppRun.java
-C:\java\java_core_l2\ChatClient\src\main\java\ru\geekbrains\ChatApp.java
-C:\java\java_core_l2\ChatClient\src\main\java\ru\geekbrains\ChatController.java
+/home/kikimarik/IdeaProjects/gb_java_3_chat/ChatClient/src/main/java/ru/geekbrains/AppRun.java
+/home/kikimarik/IdeaProjects/gb_java_3_chat/ChatClient/src/main/java/ru/geekbrains/logger/Logger.java
+/home/kikimarik/IdeaProjects/gb_java_3_chat/ChatClient/src/main/java/ru/geekbrains/to_delete/NetworkHelper.java
+/home/kikimarik/IdeaProjects/gb_java_3_chat/ChatClient/src/main/java/ru/geekbrains/to_delete/MessageServiceOld.java
+/home/kikimarik/IdeaProjects/gb_java_3_chat/ChatClient/src/main/java/ru/geekbrains/ChatController.java
+/home/kikimarik/IdeaProjects/gb_java_3_chat/ChatClient/src/main/java/ru/geekbrains/to_delete/SingleClientConsole.java
+/home/kikimarik/IdeaProjects/gb_java_3_chat/ChatClient/src/main/java/ru/geekbrains/ChatApp.java
+/home/kikimarik/IdeaProjects/gb_java_3_chat/ChatClient/src/main/java/ru/geekbrains/logger/MessageLogger.java
