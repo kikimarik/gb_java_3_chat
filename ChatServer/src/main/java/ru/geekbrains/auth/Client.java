@@ -13,11 +13,17 @@ public class Client {
     private String username;
     private String login;
     private String password;
+    private Boolean isAuthorized = false;
 
     public Client(String username, String login, String password) {
         this.username = username;
         this.login = login;
         this.password = password;
+    }
+
+    public Client(String username, String login) {
+        this.username = username;
+        this.login = login;
     }
 
     public String getUsername() {
@@ -42,5 +48,13 @@ public class Client {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean isAuthorized() {
+        return isAuthorized;
+    }
+
+    public void setAuthorized(Boolean authorized) {
+        isAuthorized = authorized;
     }
 }
