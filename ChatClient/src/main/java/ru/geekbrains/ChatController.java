@@ -66,6 +66,10 @@ public class ChatController implements Initializable, MessageProcessor {
     public TextField loginField;
     @FXML
     public PasswordField passField;
+    @FXML
+    public HBox requestPanel;
+    @FXML
+    public TextField usernameField;
 
     private MessageService messageService;
 
@@ -121,7 +125,7 @@ public class ChatController implements Initializable, MessageProcessor {
         try {
             throw new RuntimeException("AAAAAAAAAAAAAAAAAAAA!!!!!!!");
         } catch (RuntimeException e) {
-            showError(e);
+            showError(e, "test");
         }
     }
 
@@ -212,6 +216,7 @@ public class ChatController implements Initializable, MessageProcessor {
                     chatBox.setVisible(true);
                     inputBox.setVisible(true);
                     menuBar.setVisible(true);
+                    requestPanel.setVisible(true);
                 }
 
                 case ERROR_MESSAGE -> showError(dto);
@@ -238,13 +243,27 @@ public class ChatController implements Initializable, MessageProcessor {
     }
 
     /**
+     * метод отправляющий сообщение с данными для авторизации
+     *
+     * @param actionEvent
+     */
+    public void sendChangeNameRequest(ActionEvent actionEvent) {
+        String username = usernameField.getText();
+        MessageDTO dto = new MessageDTO();
+        dto.setUsername(username);
+        dto.setMessageType(MessageType.SEND_CHANGE_NAME_REQUEST);
+        messageService.sendMessage(dto.convertToJson());
+        System.out.println("Sent request for change username to  " + username);
+    }
+
+    /**
      * метод, который показывает ошибки в графическом интерфейсе
      *
      * @param e
      */
-    private void showError(Exception e) {
+    private void showError(Exception e, String title) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Something went wrong!");
+        alert.setTitle(title);
         alert.setHeaderText(e.getMessage());
         VBox dialog = new VBox();
         Label label = new Label("Trace:");

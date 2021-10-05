@@ -23,6 +23,7 @@ public class MessageDTO implements Serializable {
     private String to;
     private String from;
     private List<String> usersOnline;
+    private String requestedUsername;
 
     public static MessageDTO convertFromJson(String json) {
         return new Gson().fromJson(json, MessageDTO.class);
@@ -86,5 +87,13 @@ public class MessageDTO implements Serializable {
 
     public void setUsersOnline(List<String> usersOnline) {
         this.usersOnline = usersOnline;
+    }
+
+    public void setUsername(String username) {
+        this.requestedUsername = username;
+    }
+
+    public String getRequestedUsername() {
+        return requestedUsername;
     }
 }

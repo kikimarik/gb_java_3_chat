@@ -1,5 +1,6 @@
 package ru.geekbrains.server;
 
+import ru.geekbrains.auth.Client;
 import ru.geekbrains.messages.MessageDTO;
 import ru.geekbrains.messages.MessageType;
 
@@ -8,6 +9,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.Timer;
 
 /**
@@ -27,6 +29,7 @@ public class ClientHandler {
     private DataInputStream inputStream;
     private ChatServer chatServer;
     private String currentUserName;
+    private Client currentUser;
 
     public ClientHandler(Socket socket, ChatServer chatServer) {
         try {
@@ -79,9 +82,10 @@ public class ClientHandler {
                 switch (dto.getMessageType()) {
                     case PUBLIC_MESSAGE -> chatServer.broadcastMessage(dto);
                     case PRIVATE_MESSAGE -> chatServer.sendPrivateMessage(dto);
+                    case SEND_CHANGE_NAME_REQUEST -> chatServer.requestChangeName(currentUser, dto.getRequestedUsername());
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | NoSuchAlgorithmException e) {
             e.printStackTrace();
             Thread.currentThread().interrupt();
         } finally {
@@ -101,7 +105,8 @@ public class ClientHandler {
                 String authMessage = inputStream.readUTF();
                 System.out.println("received msg ");
                 MessageDTO dto = MessageDTO.convertFromJson(authMessage);
-                String username = chatServer.getAuthService().getUsernameByLoginPass(dto.getLogin(), dto.getPassword());
+                Client user = chatServer.getAuthService().authUser(dto.getLogin(), dto.getPassword());
+                String username = user.getUsername();
                 MessageDTO response = new MessageDTO();
                 if (username == null) {
                     response.setMessageType(MessageType.ERROR_MESSAGE);
@@ -115,6 +120,7 @@ public class ClientHandler {
                     response.setMessageType(MessageType.AUTH_CONFIRM);
                     response.setBody(username);
                     currentUserName = username;
+                    currentUser = user;
                     chatServer.subscribe(this);
                     System.out.println("Subscribed");
                     sendMessage(response);
@@ -123,7 +129,7 @@ public class ClientHandler {
                 sendMessage(response);
 
             }
-        } catch (IOException e) {
+        } catch (Throwable e) {
             e.printStackTrace();
             closeHandler();
         }
