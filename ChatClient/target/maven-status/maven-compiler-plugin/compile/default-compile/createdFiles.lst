@@ -1,5 +1,7 @@
 ru/geekbrains/to_delete/SingleClientConsole.class
 ru/geekbrains/ChatApp.class
+ru/geekbrains/logger/MessageLogger.class
+ru/geekbrains/logger/Logger.class
 ru/geekbrains/AppRun.class
 ru/geekbrains/to_delete/NetworkHelper.class
 ru/geekbrains/ChatController$1.class
