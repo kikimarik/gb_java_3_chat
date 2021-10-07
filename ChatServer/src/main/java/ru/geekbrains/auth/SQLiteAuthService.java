@@ -90,23 +90,23 @@ public class SQLiteAuthService implements AuthService {
 
     @Override
     public void registerUser(Client client) throws NoSuchAlgorithmException {
-        Connection connection = this.createConnection();
-        this.startTransaction(connection);
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO `user` (`name`, `login`, `password_hash`) VALUES (?, ?, ?)"
-            );
-            statement.setString(1, client.getUsername());
-            statement.setString(2, client.getLogin());
-            statement.setString(3, this.createPasswordHash(client.getPassword()));
-            statement.executeUpdate();
-            this.commitTransaction(connection);
-        } catch (SQLException e) {
-            this.rollbackTransaction(connection);
-            throw new RuntimeException(e.getMessage(), e);
-        } finally {
-            this.removeConnection(connection);
-        }
+//        Connection connection = this.createConnection();
+//        this.startTransaction(connection);
+//        try {
+//            PreparedStatement statement = connection.prepareStatement(
+//                    "INSERT INTO `user` (`name`, `login`, `password_hash`) VALUES (?, ?, ?)"
+//            );
+//            statement.setString(1, client.getUsername());
+//            statement.setString(2, client.getLogin());
+//            statement.setString(3, this.createPasswordHash(client.getPassword()));
+//            statement.executeUpdate();
+//            this.commitTransaction(connection);
+//        } catch (SQLException e) {
+//            this.rollbackTransaction(connection);
+//            throw new RuntimeException(e.getMessage(), e);
+//        } finally {
+//            this.removeConnection(connection);
+//        }
     }
 
     @Override
