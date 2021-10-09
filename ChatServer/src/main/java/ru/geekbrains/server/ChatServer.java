@@ -31,7 +31,7 @@ public class ChatServer {
 
     public ChatServer() throws NoSuchAlgorithmException {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            System.out.println("Server started by Thread " + Thread.currentThread().getName());
+            System.out.println("Server started");
             authService = new SQLiteAuthService();
             authService.start();
             onlineClientsList = new LinkedList<>();
