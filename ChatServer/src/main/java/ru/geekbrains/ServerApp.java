@@ -3,6 +3,9 @@ package ru.geekbrains;
 import ru.geekbrains.server.ChatServer;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Project java_core_l2
@@ -38,7 +41,9 @@ public class ServerApp {
     //Цензура?
 
 
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        new ChatServer();
+    public static void main(String[] args) {
+        ExecutorService pool = Executors.newCachedThreadPool();
+        pool.submit(ChatServer::new);
+        pool.shutdown();
     }
 }
